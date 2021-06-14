@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 1</title>
+  </head>
+
+  <body>
+    <div>
+      <div style="width: 40%; margin: 0 auto">
+        <h2>Escríbenos !!!</h2>
+        <div class="resultado" style="color: green; font-style: italic"></div>
+        <form id="formulario">
+          <div>
+            <div style="display: flex; flex-direction: column">
+              <label> Nombre completo </label>
+              <input id="nombre" type="text" />
+              <p class="errorNombre" style="color: red; font-style: italic"></p>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <label> Asunto </label>
+              <input id="asunto" type="text" />
+              <p class="errorAsunto" style="color: red; font-style: italic"></p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <label> Mensaje </label>
+            <textarea id="mensaje"></textarea>
+            <p class="errorMensaje" style="color: red; font-style: italic"></p>
+          </div>
+          <div>
+            <button id="botton" type="submit">Envíar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      let form = document.querySelector("#formulario");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        valorNombre = document.querySelector("#nombre").value;
+        valorAsunto = document.querySelector("#asunto").value;
+        valorMensaje = document.querySelector("#mensaje").value;
+        const resultadoValidado = validarValores(
+          valorNombre,
+          valorAsunto,
+          valorMensaje
+        );
+      });
+      function validarValores(valorNombre, valorAsunto, valorMensaje) {
+        if (validarTexto(valorNombre) == false) {
+          document.querySelector(".errorNombre").innerHTML =
+            "Ingresa un nombre";
+        } else {
+          document.querySelector(".errorNombre").innerHTML = "";
+        }
+        if (validarTexto(valorAsunto) == false) {
+          document.querySelector(".errorAsunto").innerHTML =
+            "Ingresa un Asunto";
+        } else {
+          document.querySelector(".errorAsunto").innerHTML = "";
+        }
+        if (validarTexto(valorMensaje) == false) {
+          document.querySelector(".errorMensaje").innerHTML =
+            "Ingresa un Mensaje";
+        } else {
+          document.querySelector(".errorMensaje").innerHTML = "";
+        }
+        if (
+          validarTexto(valorNombre) &&
+          validarTexto(valorAsunto) &&
+          validarTexto(valorMensaje)
+        ) {
+          document.querySelector(".resultado").innerHTML =
+            "El mensaje fue enviado con exito";
+        } else {
+          document.querySelector(".resultado").innerHTML = "";
+        }
+      }
+      function validarTexto(texto) {
+        return /^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/.test(texto);
+      }
+    </script>
+  </body>
+</html>
